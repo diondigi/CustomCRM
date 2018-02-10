@@ -9,22 +9,26 @@ __author__ = 'fw'
 from crm import models
 from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
-
+#数据结构容器
 enable_admin = {}
 #{"crm":{"customer":"customerAdmin"}}
 #admin.site.register(models.Customer,CustomerAdmin)
+
+#构造数据结构--->通过models类和自定义类注册获取
 def register(model_class,admin_class=None):
     #通过model中的类名来获取类对应的应用名
     app_name = model_class._meta.app_label
     if app_name not in enable_admin:
+        #添加项目名称
         enable_admin[app_name] = {}
     table_name = model_class._meta.model_name
-    #为类添加一个属性
+    #添加自定义类属性为models类
     admin_class.model = model_class
+    #通过表名获取到自定义类
     enable_admin[app_name][table_name] = admin_class
 
 
-
+#创建基类
 class BaseAdmin(object):
     list_display = []
     list_filter = []
@@ -50,6 +54,7 @@ class BaseAdmin(object):
 from django.shortcuts import HttpResponse, render,redirect
 from django.utils.safestring import mark_safe
 from king_admin import utils
+#自定义类，显示特定字段
 class CustomerAdmin(BaseAdmin):
     # 数据显示的字段 ,并且实现表中没有的自定制字段的显示,如enroll
     list_display = ["id","qq","name","source","status","consultant","consult_course","date","status","enroll"]
@@ -224,7 +229,7 @@ class MenuAdmin(BaseAdmin):
 class ContractAdmin(BranchAdmin):
     pass
 
-
+#进行注册，构造数据结构
 register(models.Contract,ContractAdmin)
 register(models.Customer,CustomerAdmin)
 
