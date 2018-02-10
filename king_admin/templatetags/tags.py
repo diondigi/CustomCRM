@@ -10,6 +10,7 @@ from django import template
 
 register = template.Library()
 
+#------------------------显示表名称-->中文---------------------------
 @register.simple_tag
 def render_app_name(admin_class):
     # return admin_class.model._meta.verbose_name
@@ -31,20 +32,25 @@ def get_query_sets(admin_class):
 
 from django.core.exceptions import FieldDoesNotExist
 from django.utils.safestring import mark_safe
+#-------------------------创建表格行数据-----------------------------
 @register.simple_tag
 def build_table_row(obj,admin_class,request):
+    #创建标签元素--空，None不行
     row = ""
     if admin_class.list_display:
+        #遍历要显示的models字段
         for index,column in enumerate(admin_class.list_display):
             try:
-                #获取一个字段对象
+                ##获取要显示字段对应的字段对象
                 field_obj = obj._meta.get_field(column)
+                #获取数据，判断choice
                 if field_obj.choices:
                     column_data = dict(field_obj.choices)[getattr(obj,column)]
-                    #getattr(obj,"get_%s_display"%column)()通过此种方法也能获取到一个字段对应的值
+                    #getattr(obj,"get_%s_display"%column)()通过此种方法也能获取到一个字段对应的值。
                 else:
                     # 通过反射来获取一个对象对应的属性内容
                     column_data = getattr(obj,column)
+                #时间格式转换
                 if type(column_data).__name__ == "datetime":
                     column_data = column_data.strftime("%Y-%m-%d %H:%M:%S")
             except FieldDoesNotExist as e:
@@ -62,6 +68,7 @@ def build_table_row(obj,admin_class,request):
             if index == 0:
                 column_data = '<a href="{request_path}{obj_id}/change/?page={page}">{data}</a>'.\
                     format(request_path=request.path,obj_id=obj.id,data=column_data,page=request.GET.get("page"))
+            #标签元素的拼接
             row += "<td>%s</td>"%column_data
             # delete_bnt = '''<td><a class="btn btn-danger hide pull-right"  app_name="{app_name}" table_name="{table_name}"
             #                 data_id="{obj_id}" data-toggle="modal" data-target="#myModal">删除</a></td>'''.\
