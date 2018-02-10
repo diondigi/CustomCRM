@@ -259,6 +259,7 @@ from django.utils.timezone import datetime,timedelta
 #生成过滤条件
 @register.simple_tag
 def rander_table_filter(condition,admin_class,selected_filters):
+    #初始化下拉框
     """
              <div class="col-lg-2">
              adf
@@ -269,15 +270,18 @@ def rander_table_filter(condition,admin_class,selected_filters):
          </div>
     """
     table_filter = '<div class="col-md-2">%s%s</div>'
+    #获取字段
     field_obj = admin_class.model._meta.get_field(condition)
     #当字段为choices时
     if field_obj.choices:
         select = '''<select name="%s" class="form-control">
                     <option value="" >-----</option>
                     %s</select>'''
+        #字段处理，默认不选中
         option_list = ""
+        #遍历choices值
         for choice  in field_obj.choices:
-
+            #判断选择条件是否和choice值相等
             if selected_filters  and choice[0] == int(selected_filters.get(condition,9999)):
                 option = "<option value='%s' selected='selected'>%s</option>" % (choice[0], choice[1])
             else:
@@ -294,12 +298,13 @@ def rander_table_filter(condition,admin_class,selected_filters):
                         %s</select>'''
             option_list = ""
             for choice in field_obj.get_choices()[1:]:
-
+                # 判断选择条件是否和choice值相等
                 if selected_filters and choice[0] == int(selected_filters.get(condition,9999)):
                     option = "<option value='%s' selected='selected'>%s</option>" % (choice[0], choice[1])
                 else:
                     option = "<option value='%s'>%s</option>" % (choice[0], choice[1])
                 option_list += option
+            # 被选中    
             select = select % (condition,option_list)
             table_filter = table_filter % (condition, select)
             return mark_safe(table_filter)
