@@ -80,7 +80,8 @@ def change_table_obj(request,app_name,table_name,selected_id):
     admin_class.modify_flag = True
     model_form_class = create_model_form(request,admin_class)
     if request.method == "POST":
-        #ModelForm的页面数据修改功能,将数据与modelform进行绑定
+        #ModelForm的页面数据修改功能,将数据与modelform进行绑定.实质是更新数据
+        #instance=obj是从数据库种取到数据
         model_form_obj = model_form_class(request.POST,instance=obj)
         if model_form_obj.is_valid():
             model_form_obj.save()
