@@ -123,4 +123,5 @@ def create_model_form(request,admin_class):
     _model_form_class = type("DynamicModelForm",(ModelForm,),attrs)
     setattr(_model_form_class,"__new__",__new__)
     setattr(_model_form_class,"clean",default_clean)
+    #传递动态生成的类到views.py对应的change_table_obj()中处理
     return _model_form_class
