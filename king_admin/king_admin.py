@@ -3,7 +3,8 @@
 
 
 '''
-
+这里重写admin.将新的admin作为一个应用，便于扩展和移植。根目录下，创建应用，并命名为：king_admin.这里不显示原生后台的Users和Groups内容，
+将在后面的权限管理中独立出来
 '''
 __author__ = 'fw'
 from crm import models
