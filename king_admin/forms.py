@@ -28,7 +28,7 @@ def create_model_form(request,admin_class):
         #给字段qq在Html的中添加class="form-control"样式
         #cls.base_fields["qq"].widget.attrs["class"] = "form-control"
         #动态为所有的字段设置form-control样式
-
+        #因base_fields本身是字典类型对象，包含了cls中的数据，所以可以遍历赋值
         for field_name,field_obj in cls.base_fields.items():
             field_obj.widget.attrs["class"] = "form-control"
 
