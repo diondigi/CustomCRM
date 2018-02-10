@@ -120,6 +120,7 @@ def create_model_form(request,admin_class):
     # _model_form_class = type("DynamicModelForm",(ModelForm,),{})
     # setattr(_model_form_class,"Meta",Meta)
     attrs = {"Meta":Meta}
+    #注意type()中必须传递三个参数，否则会报错
     _model_form_class = type("DynamicModelForm",(ModelForm,),attrs)
     setattr(_model_form_class,"__new__",__new__)
     setattr(_model_form_class,"clean",default_clean)
