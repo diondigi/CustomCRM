@@ -19,7 +19,9 @@
                         {% endif %}
                     </label>
                     <div class="col-md-6">
-                        <!--判断复选框-->
+                        <!--判断复选框,admin在使用ManyToManyField的时候，默认使用垂直filter_vertical方式进行显示与选择。
+                        此方式在选项比较多的时候，难以直观的看出哪些选项被选中.所以我们这里用filter_horizontal来进行横向
+                        显示与选择，在models.py中设置filter_horizontal联动-->
                         {% if field.name in admin_class.filter_horizontal %}
                             <div class="col-md-5">
                                 <!--备选框-->
