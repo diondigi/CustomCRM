@@ -1,18 +1,18 @@
 {
-  "name": "clipboard.js",
-  "main": "clipboard.js",
+  "name": "fanwu.js",
+  "main": "fanwu.js",
   "version": "0.3.5",
-  "homepage": "https://github.com/diondigi/clipboard.js",
+  "homepage": "https://github.com/diondigi/CustomCRM.js",
   "authors": [
-    "code@garron.net"
+    "code@163.net"
   ],
-  "description": "A web shim to handle clipboard APIs across browsers using a simple Promise API.",
+  "description": "A web shim to handle fanwu APIs across browsers using a simple Promise API.",
   "moduleType": [],
   "ignore": [
     "index.html"
   ],
   "keywords": [
-    "clipboard",
+    "fanwu",
     "HTML5",
     "copy",
     "copying",
