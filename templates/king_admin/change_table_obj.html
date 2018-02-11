@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <!--由于label中自动的所字体加粗了，所以就需要设置字体为正常格式-->
                     <label for="{{ field.id_for_label }}" class="col-sm-2 control-label" style="font-weight: normal">
-                        <!--设置必填字段required-->
+                        <!--设置必填字段required，显示名称-->
                         {% if field.field.required %}
                             <b><a href="#" data-toggle="tooltip" data-placement="left"
                                   title="{{ field.label }}">{{ field.name }}</a></b>
@@ -76,7 +76,7 @@
 
             <div class="form-group col-md-10">
                 <a href="javascript:window.history.back();" class="btn btn-default pull-left">返回</a>
-                <!--如果readonly_table为true，表示整表数据不被修改或添加-->
+                <!--添加保存按钮，如果readonly_table为true，表示整表数据不被修改或添加-->
                 <button type="submit" class="btn btn-success pull-right"{% if admin_class.readonly_table %} disabled {% endif %}>保存</button>
             </div>
         </form>
