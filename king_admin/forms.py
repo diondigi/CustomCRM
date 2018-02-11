@@ -124,6 +124,8 @@ def create_model_form(request,admin_class):
     #注意type()中必须传递三个参数，否则会报错
     #type函数创建类--->type('类名',(基类,),以字典形式的类的成员)
     _model_form_class = type("DynamicModelForm",(ModelForm,),attrs)
+    #为该类添加__new__静态方法，当调用该类时，会先执行__new__方法，创建对象。
+    # 这里会覆盖父类的__new__
     setattr(_model_form_class,"__new__",__new__)
     setattr(_model_form_class,"clean",default_clean)
     #传递动态生成的类到views.py对应的change_table_obj()中处理
