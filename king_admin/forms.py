@@ -110,6 +110,7 @@ def create_model_form(request,admin_class):
         if error_list:
             raise  ValidationError(error_list)
 
+    #-----------------------类成员构造-----------------------------
     class Meta:
         model = admin_class.model
         #显示所有字段
@@ -121,6 +122,7 @@ def create_model_form(request,admin_class):
     # setattr(_model_form_class,"Meta",Meta)
     attrs = {"Meta":Meta}
     #注意type()中必须传递三个参数，否则会报错
+    #type函数创建类--->type('类名',(基类,),以字典形式的类的成员)
     _model_form_class = type("DynamicModelForm",(ModelForm,),attrs)
     setattr(_model_form_class,"__new__",__new__)
     setattr(_model_form_class,"clean",default_clean)
