@@ -34,7 +34,9 @@ class BaseAdmin(object):
     list_display = []
     list_filter = []
     # search_field = ["id"]
+    #分页每页显示数据量
     list_per_page = 10
+    #在前端以横向方式显示复选框
     filter_horizontal = []
     readonly_fields = []
     #设置表的只读属性
