@@ -139,7 +139,7 @@
                 $(this).parent().parent().parent().find(".mult_select").append($(this));
             });
 
-            //多选框中的右箭头实现选择操作
+            //多选框中的右箭头实现选择操作,动态添加所选元素到右边
             $(".row").delegate(".glyphicon-arrow-right", "click", function () {
                 var select_tag = $(this).parent().parent().parent().find(".mult_select")
                 var selected_tag = $(this).parent().parent().parent().find(".mult_selected")
@@ -149,7 +149,7 @@
                 selected_tag.find("option:selected").prop("selected", false);
 
             });
-                        //多选框中的左箭头实现选择操作
+            //多选框中的左箭头实现选择操作，动态添加所选元素到左边
             $(".row").delegate(".glyphicon-arrow-left", "click", function () {
                 var select_tag = $(this).parent().parent().parent().find(".mult_select")
                 var selected_tag = $(this).parent().parent().parent().find(".mult_selected")
