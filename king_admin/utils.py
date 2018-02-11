@@ -30,13 +30,17 @@ def table_order(request,contact_list):
 
     return contact_list,order_key_dict
 
+#---------------------编写搜索功能函数-------------------------------
 from django.db.models import Q
 def table_search(request,contact_list,admin_class):
+    #在请求中通过参数查询结果
     search_key = request.GET.get("search_text")
     if search_key:
+        #创建Q查询对象,组合搜索
         q_obj = Q()
+        #设定连接方式
         q_obj.connector = "OR"
-        #多个字段的动态查询
+        #多个字段的动态查询，遍历搜索选项
         for column in admin_class.search_field:
             q_obj.children.append(("%s__contains"%column,search_key))
 
