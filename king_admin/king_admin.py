@@ -142,6 +142,7 @@ class CustomerAdmin(BaseAdmin):
                )
 
     #自定制单个字段的验证规则，抛出的错误会在template模板中"字段.errors.0"显示
+    #具体验证逻辑在form.py中
     def clean_name(modelform_obj):
         field_name_val = modelform_obj.cleaned_data.get("name")
         print("field_name_val:",field_name_val)
