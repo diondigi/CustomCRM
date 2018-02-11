@@ -161,12 +161,13 @@
 
         });
 
-        //数据提交前的进行多选框的全选操作
+        //数据提交前的进行多选框的全选操作,prop()方法设置或返回被选元素的属性和值。当该方法用于返回属性值时，则返回第一个匹配元素的值。
         function Presumbit() {
             $(".mult_selected option").each(function () {
                 $(this).prop("selected", true);
             })
-            //提交前将去除掉disabled属性，以免提交的值为空
+            //提交前将去除掉disabled属性，以免提交的值为空,
+            //removeProp() 方法移除由 prop() 方法设置的属性。注意：不要使用该方法来移除诸如 style、id 或 checked 之类的 HTML 属性
             $("[disabled]").removeProp("disabled")
             $(".form-horizontal").submit();
         };
