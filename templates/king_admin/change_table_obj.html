@@ -9,6 +9,7 @@
                 <div class="form-group">
                     <!--由于label中自动的所字体加粗了，所以就需要设置字体为正常格式-->
                     <label for="{{ field.id_for_label }}" class="col-sm-2 control-label" style="font-weight: normal">
+                        <!--设置必填字段required-->
                         {% if field.field.required %}
                             <b><a href="#" data-toggle="tooltip" data-placement="left"
                                   title="{{ field.label }}">{{ field.name }}</a></b>
@@ -171,6 +172,7 @@
     </script>
 {% endblock %}
 {% block css %}
+    <!--添加复选框的样式,在base.html中也有继承的区块-->
     <style>
         .filter_mult_select {
             height: 200px !important;
