@@ -12,11 +12,13 @@ def index(request):
 def app_index(request,app_name):
     return redirect("/king_admin/")
 
+#搜索功能已经写好，视图函数这里只需要引用添加就完美了。先找到过滤后的数据变量，将其作为参数传入即可
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from king_admin import utils
 # @login_required
 @permission.check_permission
 def display_table_objs(request,app_name,table_name):
+    #获取自定义的admin_class
     admin_class = king_admin.enable_admin[app_name][table_name]
     #用于自定义操作的Post提交
     if request.method == "POST":
@@ -24,6 +26,7 @@ def display_table_objs(request,app_name,table_name):
 
         if request.POST.get("ids") and select_action:
             if request.POST.get("ids") == "__all__":
+                #数据查询
                 querysets = admin_class.model.objects.all()
             else:
                 id_list = request.POST.get("ids").split(",")
@@ -48,10 +51,12 @@ def display_table_objs(request,app_name,table_name):
     if "show_all" in request.GET.keys():
         paginator = Paginator(contact_list, len(contact_list))
     else:
-        paginator = Paginator(contact_list, admin_class.list_per_page)  # Show 25 contacts per page
+        paginator = Paginator(contact_list, admin_class.list_per_page)  # Show 25 contacts per page，分页对象创建
 
     page = request.GET.get('page')
+    #页面异常处理
     try:
+        #直接获取该页内容
         query_sets = paginator.page(page)
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.
@@ -66,7 +71,7 @@ def display_table_objs(request,app_name,table_name):
                                                         "table_filter":table_filter,
                                                         "selected_filters":selected_filters,
                                                         "paginator":paginator,
-                                                        "query_sets":query_sets,
+                                                        "query_sets":query_sets,#搜索结果作为参数返回
                                                         "order_key_dict":order_key_dict,
                                                         "admin_class":admin_class})
 
