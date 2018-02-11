@@ -76,12 +76,14 @@ import json
 @login_required
 def change_table_obj(request,app_name,table_name,selected_id):
     admin_class = king_admin.enable_admin[app_name][table_name]
+    #通过id获取数据库内容
     obj = admin_class.model.objects.filter(id=int(selected_id)).first()
     admin_class.modify_flag = True
+    #创建ModelForm类
     model_form_class = create_model_form(request,admin_class)
     if request.method == "POST":
         #ModelForm的页面数据修改功能,将数据与modelform进行绑定.实质是更新数据
-        #instance=obj是从数据库种取到数据
+        #instance=obj是从数据库中取到的数据
         model_form_obj = model_form_class(request.POST,instance=obj)
         if model_form_obj.is_valid():
             model_form_obj.save()
