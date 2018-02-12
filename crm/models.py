@@ -127,13 +127,16 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     #重写父类的password属性，以便不修改源代码，添加一个help_text属性用于修改密码
     password = models.CharField(_('password'), max_length=128,help_text="<a href='javascript:' data-toggle='modal' data-target='#myModal'>密码修改</a>")
     name = models.CharField(verbose_name="用户名",max_length=32)
+    #是否活跃，权限设置：可封禁
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     roles = models.ManyToManyField(to="Role",blank=True,verbose_name="角色")
     stu_enrollment = models.ForeignKey(to="Customer",blank=True,null=True,verbose_name="已报名的学生")
     objects = UserProfileManager()
-
+    
+    #指定emali作为用户名
     USERNAME_FIELD = 'email'
+    #必填字段
     REQUIRED_FIELDS = ['name']
 
     #为认证类添加自定义的权限列表
@@ -167,6 +170,7 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
         # Simplest possible answer: Yes, always
         return True
 
+    #判断权限：user是否是员工？
     @property
     def is_staff(self):
         "Is the user a member of staff?"
