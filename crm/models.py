@@ -98,7 +98,8 @@ class UserProfileManager(BaseUserManager):
             email=self.normalize_email(email),
             name=name,
         )
-
+        
+        #设置密码，存入数据库为md5加密方式，还加了salt
         user.set_password(password)
         user.save(using=self._db)
         return user
