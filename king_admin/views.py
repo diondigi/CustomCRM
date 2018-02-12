@@ -25,6 +25,7 @@ def display_table_objs(request,app_name,table_name):
         select_action = request.POST.get("select_action")
 
         if request.POST.get("ids") and select_action:
+            #利用"__all__"暴露所有API
             if request.POST.get("ids") == "__all__":
                 #数据查询
                 querysets = admin_class.model.objects.all()
