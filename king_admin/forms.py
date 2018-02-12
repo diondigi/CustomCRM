@@ -8,6 +8,7 @@ __author__ = "fw"
 from django.forms import ModelForm,fields
 from django.forms import ValidationError
 from crm import models
+#导入国际化方法：在视图中，通过_()或ugettext()函数，指定某个变量需要翻译
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -127,6 +128,7 @@ def create_model_form(request,admin_class):
     #为该类添加__new__静态方法，当调用该类时，会先执行__new__方法，创建对象。
     # 这里会覆盖父类的__new__
     setattr(_model_form_class,"__new__",__new__)
+    #这里为该类添加了clean方法，当form提交时，会自动执行clean验证
     setattr(_model_form_class,"clean",default_clean)
     #传递动态生成的类到views.py对应的change_table_obj()中处理
     return _model_form_class
