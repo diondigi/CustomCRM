@@ -41,6 +41,7 @@ def create_model_form(request,admin_class):
                 field_obj.widget.attrs["maxlength"] = ""
             #print("------------------------",hasattr(admin_class,"_modify_flag"))
             #表示如果没有_modify_flag的字段属性那就是修改操作，所以就是需要添加上readonly属性，否则就是表单的添加操作就不需要readonly
+            #此处反射方法获取到的modify_flag参数在views.py中，属于def change_table_obj方法下的bool标志位
             if hasattr(admin_class,"modify_flag"):
                 if getattr(admin_class,"modify_flag"):
                     #设置只读字段,如果想使用disabled这个来控制只读的话，那就需要在前端页面上提交时将disabled去除掉来，这样request.POST中
