@@ -132,6 +132,7 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     roles = models.ManyToManyField(to="Role",blank=True,verbose_name="角色")
     stu_enrollment = models.ForeignKey(to="Customer",blank=True,null=True,verbose_name="已报名的学生")
+    #固定样式，只能命名为objects，将验证方法与创建user函数相关联
     objects = UserProfileManager()
     
     #指定emali作为用户名
