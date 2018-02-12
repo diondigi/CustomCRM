@@ -120,6 +120,7 @@ class CustomerAdmin(BaseAdmin):
 
 
     #用户自定制验证规则接口,此接口函数其实是在modeform表单进行数据验证时自动调用的
+    #这里用户自定义form验证，相当于django框架中form的clean方法
     #以下例子是用来判断customer表中的content字段长度必须大于10,否则抛出异常然后在前台表单中的formobj.errors中显示
     def default_form_validation(modelform_obj):
         #后端对象
