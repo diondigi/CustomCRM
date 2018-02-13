@@ -18,7 +18,7 @@ from king_admin import utils
 # @login_required
 @permission.check_permission
 def display_table_objs(request,app_name,table_name):
-    #获取自定义的admin_class
+    #从king_admin中获取自定义的admin_class
     admin_class = king_admin.enable_admin[app_name][table_name]
     #用于自定义操作的Post提交
     if request.method == "POST":
