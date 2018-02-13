@@ -15,6 +15,7 @@ enable_admin = {}
 #{"crm":{"customer":"customerAdmin"}}
 #admin.site.register(models.Customer,CustomerAdmin)
 
+#覆写admin的起点，很重要，理解其实现思路
 #构造数据结构--->通过models类和自定义类注册获取
 def register(model_class,admin_class=None):
     #通过model中的类名来获取类对应的应用名
