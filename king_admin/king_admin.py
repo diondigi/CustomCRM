@@ -79,6 +79,7 @@ class CustomerAdmin(BaseAdmin):
     # readonly_table = True
     readonly_table = False
 
+    #实现表中没有的自定制Field的显示功能，与forms.py中函数关联
     def enroll(self):
         #此处可以弹出一个页面，然后进行一下步操作
         #由于此方法在动态调用前，对self动态添加了两个属性request,obj_id
