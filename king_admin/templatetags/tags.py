@@ -55,7 +55,7 @@ def build_table_row(obj,admin_class,request):
                     column_data = column_data.strftime("%Y-%m-%d %H:%M:%S")
             except FieldDoesNotExist as e:
                 print("显示字段不存在,字段名为：",column)
-                #在admin中添加自定义Field,显示自定义内容
+                #在king_admin.py中添加自定义Field,显示自定义内容
                 if hasattr(admin_class,column):
                     admin_class.request = request
                     admin_class.row_id = obj.id
