@@ -40,6 +40,7 @@ class ModelFormCustomer(ModelForm):
     class Meta:
         model = models.Customer
         fields = "__all__"
+        #自定义隐藏字段
         exclude = ["status","content","tags","memo","referral_from"]
         #自定义只读字段
         readonly_fields = ["qq","consultant","source"]
